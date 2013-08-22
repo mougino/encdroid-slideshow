@@ -1,0 +1,42 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/volume_browser_menu_paste"
+        android:icon="?attr/menuIconPaste"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_paste"
+        android:visible="false"/>
+    <item
+        android:id="@+id/volume_browser_menu_shuffle"
+        android:icon="@drawable/ic_menu_shuffle"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_shuffle"/>
+    <item
+        android:id="@+id/volume_browser_menu_filter"
+        android:icon="@drawable/ic_menu_filter"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_filter"/>
+    <item
+        android:id="@+id/volume_browser_menu_unfilter"
+        android:icon="@drawable/ic_menu_unfilter"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/menu_unfilter"
+        android:visible="false"/>
+    <item
+        android:id="@+id/volume_browser_menu_properties"
+        android:icon="@drawable/ic_menu_properties"
+        android:title="@string/menu_properties"/>
+    <item
+        android:id="@+id/volume_browser_menu_refresh"
+        android:icon="@drawable/ic_menu_refresh"
+        android:title="@string/menu_refresh"/>
+    <item
+        android:id="@+id/volume_browser_menu_import"
+        android:icon="@drawable/ic_menu_import_file"
+        android:title="@string/menu_import_files"/>
+    <item
+        android:id="@+id/volume_browser_menu_mkdir"
+        android:icon="@drawable/ic_menu_newfolder"
+        android:title="@string/menu_newfolder"/>
+
+</menu>
