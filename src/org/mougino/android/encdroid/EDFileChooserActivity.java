@@ -443,10 +443,7 @@ public class EDFileChooserActivity extends ListActivity {
 			public void run() {
 				switch (mMode) {
 				case VOLUME_PICKER_MODE:
-					if (mFsType == DROPBOX_FS) {
-						setTitle(getString(R.string.menu_import_vol) + " ("
-								+ getString(R.string.dropbox) + ")");
-					} else if (mFsType == EXT_SD_FS) {
+					if (mFsType == EXT_SD_FS) {
 						setTitle(getString(R.string.menu_import_vol) + " ("
 								+ getString(R.string.fs_dialog_ext_sd) + ")");
 					} else {
@@ -462,10 +459,7 @@ public class EDFileChooserActivity extends ListActivity {
 							mExportFileName));
 					break;
 				case CREATE_VOLUME_MODE:
-					if (mFsType == DROPBOX_FS) {
-						setTitle(getString(R.string.menu_create_vol) + " ("
-								+ getString(R.string.dropbox) + ")");
-					} else if (mFsType == EXT_SD_FS) {
+					if (mFsType == EXT_SD_FS) {
 						setTitle(getString(R.string.menu_create_vol) + " ("
 								+ getString(R.string.fs_dialog_ext_sd) + ")");
 					} else {

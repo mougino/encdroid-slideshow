@@ -75,8 +75,8 @@ public class EDVolumeListActivity extends ListActivity {
 	private final static int LOCAL_VOLUME_CREATE_REQUEST = 1;
 	private final static int EXT_SD_VOLUME_PICKER_REQUEST = 2;
 	private final static int EXT_SD_VOLUME_CREATE_REQUEST = 3;
-	private final static int DROPBOX_VOLUME_PICKER_REQUEST = 4;
-	private final static int DROPBOX_VOLUME_CREATE_REQUEST = 5;
+	/*private final static int DROPBOX_VOLUME_PICKER_REQUEST = 4;
+	private final static int DROPBOX_VOLUME_CREATE_REQUEST = 5;*/
 
 	// Dialog ID's
 	private final static int DIALOG_VOL_PASS = 0;
@@ -257,10 +257,6 @@ public class EDVolumeListActivity extends ListActivity {
 			mVolumeOp = VOLUME_OP_CREATE;
 			showDialog(DIALOG_FS_TYPE);
 			return true;
-		case R.id.volume_list_menu_accounts:
-			Intent showAccounts = new Intent(this, EDAccountsActivity.class);
-			startActivity(showAccounts);
-			return true;
 		case R.id.volume_list_menu_settings:
 			Intent showPrefs = new Intent(this, EDPreferenceActivity.class);
 			startActivity(showPrefs);
@@ -273,16 +269,6 @@ public class EDVolumeListActivity extends ListActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		EDDropbox dropbox = mApp.getDropbox();
-
-		if (dropbox.isLinkInProgress()) {
-			boolean success = dropbox.resumeLinking();
-
-			if (success == false) {
-				mErrDialogText = getString(R.string.dropbox_login_error);
-				showDialog(DIALOG_ERROR);
-			}
-		}
 	}
 
 	/*
@@ -568,14 +554,12 @@ public class EDVolumeListActivity extends ListActivity {
 			boolean extSd = mPrefs.getBoolean("ext_sd_enabled", false);
 			CharSequence[] fsTypes;
 			if (extSd == true) {
-				fsTypes = new CharSequence[3];
-				fsTypes[0] = getString(R.string.fs_dialog_local);
-				fsTypes[1] = "Dropbox";
-				fsTypes[2] = getString(R.string.fs_dialog_ext_sd);
-			} else {
 				fsTypes = new CharSequence[2];
 				fsTypes[0] = getString(R.string.fs_dialog_local);
-				fsTypes[1] = "Dropbox";
+				fsTypes[1] = getString(R.string.fs_dialog_ext_sd);
+			} else {
+				fsTypes = new CharSequence[1];
+				fsTypes[0] = getString(R.string.fs_dialog_local);
 			}
 			alertBuilder.setTitle(getString(R.string.fs_type_dialog_title_str));
 			alertBuilder.setItems(fsTypes,
@@ -594,26 +578,6 @@ public class EDVolumeListActivity extends ListActivity {
 								}
 								break;
 							case 1:
-								EDDropbox dropbox = mApp.getDropbox();
-
-								if (!dropbox.isAuthenticated()) {
-									dropbox.startLinkorAuth(EDVolumeListActivity.this);
-									if (!dropbox.isAuthenticated()) {
-										return;
-									}
-								}
-
-								if (mVolumeOp == VOLUME_OP_IMPORT) {
-									launchFileChooser(
-											EDFileChooserActivity.VOLUME_PICKER_MODE,
-											EDFileChooserActivity.DROPBOX_FS);
-								} else {
-									launchFileChooser(
-											EDFileChooserActivity.CREATE_VOLUME_MODE,
-											EDFileChooserActivity.DROPBOX_FS);
-								}
-								break;
-							case 2:
 								if (mVolumeOp == VOLUME_OP_IMPORT) {
 									launchFileChooser(
 											EDFileChooserActivity.VOLUME_PICKER_MODE,
@@ -659,7 +623,7 @@ public class EDVolumeListActivity extends ListActivity {
 										mSelectedVolume.getName());
 
 								// Dropbox auth if needed
-								if (mSelectedVolume.getType() == EDVolume.DROPBOX_VOLUME) {
+								/*if (mSelectedVolume.getType() == EDVolume.DROPBOX_VOLUME) {
 									EDDropbox dropbox = mApp.getDropbox();
 
 									if (!dropbox.isAuthenticated()) {
@@ -668,7 +632,7 @@ public class EDVolumeListActivity extends ListActivity {
 											return;
 										}
 									}
-								}
+								}*/
 
 								// Launch async task to delete volume
 								mAsyncTask = new DeleteVolumeTask(mProgDialog,
@@ -755,10 +719,10 @@ public class EDVolumeListActivity extends ListActivity {
 				mVolumeType = EDVolume.EXT_SD_VOLUME;
 				showDialog(DIALOG_VOL_NAME);
 				break;
-			case DROPBOX_VOLUME_PICKER_REQUEST:
+			/*case DROPBOX_VOLUME_PICKER_REQUEST:
 				mVolumeType = EDVolume.DROPBOX_VOLUME;
 				showDialog(DIALOG_VOL_NAME);
-				break;
+				break;*/
 			case LOCAL_VOLUME_CREATE_REQUEST:
 				mVolumeType = EDVolume.LOCAL_VOLUME;
 				showDialog(DIALOG_VOL_CREATE);
@@ -767,10 +731,10 @@ public class EDVolumeListActivity extends ListActivity {
 				mVolumeType = EDVolume.EXT_SD_VOLUME;
 				showDialog(DIALOG_VOL_CREATE);
 				break;
-			case DROPBOX_VOLUME_CREATE_REQUEST:
+			/*case DROPBOX_VOLUME_CREATE_REQUEST:
 				mVolumeType = EDVolume.DROPBOX_VOLUME;
 				showDialog(DIALOG_VOL_CREATE);
-				break;
+				break;*/
 			default:
 				Log.e(TAG, "File chooser called with unknown request code: "
 						+ requestCode);
@@ -799,18 +763,18 @@ public class EDVolumeListActivity extends ListActivity {
 				request = LOCAL_VOLUME_PICKER_REQUEST;
 			} else if (fsType == EDFileChooserActivity.EXT_SD_FS) {
 				request = EXT_SD_VOLUME_PICKER_REQUEST;
-			} else if (fsType == EDFileChooserActivity.DROPBOX_FS) {
+			} /*else if (fsType == EDFileChooserActivity.DROPBOX_FS) {
 				request = DROPBOX_VOLUME_PICKER_REQUEST;
-			}
+			}*/
 			break;
 		case EDFileChooserActivity.CREATE_VOLUME_MODE:
 			if (fsType == EDFileChooserActivity.LOCAL_FS) {
 				request = LOCAL_VOLUME_CREATE_REQUEST;
 			} else if (fsType == EDFileChooserActivity.EXT_SD_FS) {
 				request = EXT_SD_VOLUME_CREATE_REQUEST;
-			} else if (fsType == EDFileChooserActivity.DROPBOX_FS) {
+			} /*else if (fsType == EDFileChooserActivity.DROPBOX_FS) {
 				request = DROPBOX_VOLUME_CREATE_REQUEST;
-			}
+			}*/
 			break;
 		default:
 			Log.e(TAG, "Unknown mode id: " + mode);
@@ -869,7 +833,7 @@ public class EDVolumeListActivity extends ListActivity {
 	private void unlockSelectedVolume() {
 		mVolumeType = mSelectedVolume.getType();
 
-		if (mVolumeType == EDVolume.DROPBOX_VOLUME) {
+		/*if (mVolumeType == EDVolume.DROPBOX_VOLUME) {
 			EDDropbox dropbox = mApp.getDropbox();
 
 			if (!dropbox.isAuthenticated()) {
@@ -878,7 +842,7 @@ public class EDVolumeListActivity extends ListActivity {
 					return;
 				}
 			}
-		}
+		}*/
 
 		// If key caching is enabled, see if a key is cached
 		byte[] cachedKey = null;
@@ -931,9 +895,9 @@ public class EDVolumeListActivity extends ListActivity {
 		case EDVolume.LOCAL_VOLUME:
 			return new EncFSLocalFileProvider(new File(
 					Environment.getExternalStorageDirectory(), relPath));
-		case EDVolume.DROPBOX_VOLUME:
+		/*case EDVolume.DROPBOX_VOLUME:
 			return new EDDropboxFileProvider(mApp.getDropbox().getApi(),
-					relPath);
+					relPath);*/
 		case EDVolume.EXT_SD_VOLUME:
 			return new EncFSLocalFileProvider(new File(mPrefs.getString(
 					"ext_sd_location", "/mnt/ext_card"), relPath));

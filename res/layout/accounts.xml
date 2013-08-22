@@ -6,7 +6,7 @@
     android:layout_marginRight="20dip"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <!--LinearLayout
         android:id="@+id/accounts_linear_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,6 +57,6 @@
         android:layout_height="1dp"
         android:layout_below="@+id/accounts_button"
         android:layout_marginTop="4dip"
-        android:background="@android:color/darker_gray" />
+        android:background="@android:color/darker_gray" /-->
 
 </RelativeLayout>

@@ -68,7 +68,7 @@
     <string name="fs_dialog_local">Local</string>
     <string name="fs_dialog_ext_sd">External SD</string>
     <string name="menu_refresh">Refresh</string>
-    <string name="dropbox_login_error">Failed to login to Dropbox account</string>
+    <!--string name="dropbox_login_error">Failed to login to Dropbox account</string>
     <string name="accounts">Accounts</string>
     <string name="dropbox">Dropbox</string>
     <string name="account_status">Status:</string>
@@ -77,7 +77,7 @@
     <string name="account_not_linked">Not linked to any account</string>
     <string name="account_logged_in">Logged in as \'%s\'</string>
     <string name="account_link_btn_str">Link to an account</string>
-    <string name="account_unlink_btn_str">Click to unlink account</string>
+    <string name="account_unlink_btn_str">Click to unlink account</string-->
     <string name="export_file">Exporting \'%s\'</string>
     <string name="settings">Settings</string>
     <string name="volume_list">Volume List</string>
