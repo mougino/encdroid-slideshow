@@ -1,0 +1,17 @@
+.classpath
+.project
+.cproject
+.settings
+bin
+gen
+graphics
+obj
+proguard.cfg
+proguard-project.txt
+project.properties
+local.properties
+.vimrc
+cscope*
+
+# App Builder compiling batch
+BuildAPK.bat
